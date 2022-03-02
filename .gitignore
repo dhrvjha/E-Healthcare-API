@@ -1,0 +1,9 @@
+# folders
+
+.vscode/
+myenv/
+**/__pycache__/
+
+
+# files
+.coverage
