@@ -7,3 +7,4 @@ myenv/
 
 # files
 .coverage
+db.sqlite3
