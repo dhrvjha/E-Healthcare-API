@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-j!jq_@!djrz=#kvw=0o9$#_qmm$gt)&w=lu3b3bou!p9!qq8n1"
+SECRET_KEY = os.environ.get("DjangoProject_Admin_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get("DjangoProject_Admin_DEBUG", 0)))
 
 ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS_ENV = os.environ.get("DjangoProject_Admin_ALLOWED_HOSTS")
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
+
 AUTH_USER_MODEL = "staff.Staff"
 
 # Application definition
